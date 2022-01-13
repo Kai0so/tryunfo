@@ -24,7 +24,7 @@ class App extends React.Component {
       attr1,
       attr2,
       attr3,
-      imageurl,
+      imageUrl,
       rarity,
     } = this.state;
 
@@ -33,7 +33,7 @@ class App extends React.Component {
     const LIMIT_VALUE = 210;
     const SUM_VALUE = Number(attr1) + Number(attr2) + Number(attr3);
 
-    if (name && description && imageurl && rarity !== ''
+    if (name && description && imageUrl && rarity !== ''
       && attr1 >= MIN_VALUE
       && attr1 <= MAX_VALUE
       && attr2 >= MIN_VALUE
@@ -47,16 +47,14 @@ class App extends React.Component {
     }
   }
 
-    saveCard = (event) => {
-      event.preventDefault();
-
+    saveCard = () => {
       const {
         name,
         description,
         attr1,
         attr2,
         attr3,
-        imageurl,
+        imageUrl,
         rarity,
         trunfo,
         cardList,
@@ -68,7 +66,7 @@ class App extends React.Component {
         attr1,
         attr2,
         attr3,
-        imageurl,
+        imageUrl,
         rarity,
         trunfo,
       };
@@ -79,7 +77,7 @@ class App extends React.Component {
         attr1: '0',
         attr2: '0',
         attr3: '0',
-        imageurl: '',
+        imageUrl: '',
         rarity: 'normal',
         trunfo: false,
         cardList: [...cardList, card],
@@ -97,11 +95,12 @@ class App extends React.Component {
         attr1,
         attr2,
         attr3,
-        imageurl,
+        imageUrl,
         rarity,
         trunfo,
         isSaveButtonDisabled,
         hasTrunfo,
+        cardList,
       } = this.state;
 
       return (
@@ -115,7 +114,7 @@ class App extends React.Component {
             cardAttr1={ attr1 }
             cardAttr2={ attr2 }
             cardAttr3={ attr3 }
-            cardImage={ imageurl }
+            cardImage={ imageUrl }
             cardRare={ rarity }
             onSaveButtonClick={ this.saveCard }
             isSaveButtonDisabled={ isSaveButtonDisabled }
@@ -128,10 +127,24 @@ class App extends React.Component {
             cardAttr1={ attr1 }
             cardAttr2={ attr2 }
             cardAttr3={ attr3 }
-            cardImage={ imageurl }
+            cardImage={ imageUrl }
             cardRare={ rarity }
             cardTrunfo={ trunfo }
           />
+          { cardList.map((card, index) => (
+            <li key={ index }>
+              <Card
+                cardName={ card.name }
+                cardDescription={ card.description }
+                cardAttr1={ card.attr1 }
+                cardAttr2={ card.attr2 }
+                cardAttr3={ card.attr3 }
+                cardImage={ card.imageUrl }
+                cardRare={ card.rarity }
+                cardTrunfo={ card.trunfo }
+              />
+            </li>
+          ))}
         </>
       );
     }
